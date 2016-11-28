@@ -12,12 +12,16 @@ Bang Bang!
 
 *Bang Bang!* was inspired by the 1990 Windows game with the same name. You can play the original [here](http://playdosgamesonline.com/bang-bang.html).
 
+![](https://github.com/JoanAguilar/Matlab-games/blob/Readme-updates/images/Bangbang.png "Bang Bang! gameplay")
+
 
 Lander
 ------
 *Lander* is a 2D Moon landing simulation single player game. The goal consists of landing the Moon lander safely using a limited amount of fuel. In order to land safely, the vertical and horizontal velocities, the terrain angle, and the lander angle, all need to be less than a certain threshold. The user has control of the main thruster and the RCS thrusters (to control orientation). The game includes realistic physics with the lander modeled after the Apollo missions Moon lander.
 
 *Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
+
+![](https://github.com/JoanAguilar/Matlab-games/blob/Readme-updates/images/Lander.png "Lander gameplay")
 
 
 Disclaimer
