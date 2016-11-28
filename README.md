@@ -12,7 +12,7 @@ Bang Bang!
 
 *Bang Bang!* was inspired by the 1990 Windows game with the same name. You can play the original [here](http://playdosgamesonline.com/bang-bang.html).
 
-![](https://github.com/JoanAguilar/Matlab-games/blob/Readme-updates/images/Bangbang.png "Bang Bang! gameplay")
+![](https://github.com/JoanAguilar/Matlab-games/blob/master/images/Bangbang.png "Bang Bang! gameplay")
 
 
 Lander
@@ -21,7 +21,7 @@ Lander
 
 *Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
 
-![](https://github.com/JoanAguilar/Matlab-games/blob/Readme-updates/images/Lander.png "Lander gameplay")
+![](https://github.com/JoanAguilar/Matlab-games/blob/master/images/Lander.png "Lander gameplay")
 
 
 Disclaimer
