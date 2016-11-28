@@ -8,20 +8,24 @@ Included are two simple videogames that are coded and run using Matlab. I coded 
 
 Bang Bang!
 ----------
-*Bang Bang!* is a 2-player aim game that puts each player in control of a cannon. The game progresses in turns and the goal is to hit the other player's cannon with a projectile before they hit you. The game includes realistic projectile physics (including wind) and runs using Matlab or Octave.
-
-*Bang Bang!* was inspired by the 1990 Windows game with the same name. You can play the original [here](http://playdosgamesonline.com/bang-bang.html).
+*Bang Bang!* is a 2-player aim game that puts each player in control of a cannon. The game progresses in turns and the goal is to hit the other player's cannon with a projectile before they hit you. The game includes realistic projectile physics (including wind).
 
 ![](https://github.com/JoanAguilar/Matlab-games/blob/master/images/Bangbang.png "Bang Bang! gameplay")
+
+To play the game, run the file *Bangbang.m* using Matlab or Octave. You will first be asked to choose the terrain and wind conditions. From this point, players will take turns to shoot a projectile. The players get to select the initial angle and velocity of the projectile.
+
+*Bang Bang!* was inspired by the 1990 Windows game with the same name. You can play the original [here](http://playdosgamesonline.com/bang-bang.html).
 
 
 Lander
 ------
 *Lander* is a 2D Moon landing simulation single player game. The goal consists of landing the Moon lander safely using a limited amount of fuel. In order to land safely, the vertical and horizontal velocities, the terrain angle, and the lander angle, all need to be less than a certain threshold. The user has control of the main thruster and the RCS thrusters (to control orientation). The game includes realistic physics with the lander modeled after the Apollo missions Moon lander.
 
-*Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
-
 ![](https://github.com/JoanAguilar/Matlab-games/blob/master/images/Lander.png "Lander gameplay")
+
+To play *Lander* run the file *Lander.m* using Matlab. You will first be asked to select which controls you want to use and the level of difficulty. Use the controls you selected to land the Moon lander safely on the Moon.
+
+*Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
 
 
 Disclaimer
