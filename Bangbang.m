@@ -213,7 +213,7 @@ function fig = plotscenery(pos_A, pos_B, ground)
 %
 % Created by: Joan Aguilar Mayans
 % E-mail:     joana1@uci.edu
-% Date:       17-Nov-216
+% Date:       17-Nov-2016
 
 % Create figure
 fig = figure;
@@ -266,7 +266,7 @@ function [hit, traj, dt] = fire(your_pos, angle, lin_vel, enemy_pos, ground, win
 %
 % Created by: Joan Aguilar Mayans
 % E-mail:     joana1@uci.edu
-% Date:       17-Nov-216
+% Date:       17-Nov-2016
 
 % Note: variable allocation can be made more efficient.
 
@@ -327,7 +327,7 @@ function plottrajectory(fig, traj, dt, turn)
 %
 % Created by: Joan Aguilar Mayans
 % E-mail:     joana1@uci.edu
-% Date:       17-Nov-216
+% Date:       17-Nov-2016
 
 % Get number of points in the trajectory
 N = size(traj, 2);
