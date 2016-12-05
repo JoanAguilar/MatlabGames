@@ -16,12 +16,15 @@
 % Main script -------------------------------------------------------------
 %
 
-function Lander2
+function Lander
 
 % Clear
 clear;
 clc;
 close all;
+
+% Check if we are running Octave or Matlab
+is_octave = exist('OCTAVE_VERSION', 'builtin') ~= 0;
 
 % Intro
 disp('%%%%%%%%%%%%%%%%%');
@@ -150,7 +153,7 @@ hold on;
 plotscene(fig, land_dimensions, stars, @ground, pos, R, T_B, M_G);
 
 % Display information on the command window
-dispinfo(@ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS);
+dispinfo(@ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS, is_octave);
 
 % Initialize values for simulation
 % key = 'downarrow';
@@ -158,7 +161,7 @@ landed = 0;  % 0 if the lander is flying
              % 1 if it has landed 
              % 2 if it has crashed
              % 3 if the user quits
-dt = 0.01;  % Time step
+dt = 0.1;  % Time step
 while landed == 0
     
     % Set counter
@@ -178,13 +181,14 @@ while landed == 0
     end
         
 
-    % Compute thrust
+    % Compute thrust and recompute mass
     if m_fuel > 0
         switch controls_sel
             case 2
                 switch key
                     case {'numpad7', 'numpad8', 'numpad9'}
                         T_B = [0; 45040];
+                        m_fuel = m_fuel + mdot_fuel*dt;
                     otherwise
                         T_B = [0; 0];
                 end
@@ -192,6 +196,7 @@ while landed == 0
                 switch key
                     case {'q', 'w', 'e'}
                         T_B = [0; 45040];
+                        m_fuel = m_fuel + mdot_fuel*dt;
                     otherwise
                         T_B = [0; 0];
                 end     
@@ -199,6 +204,7 @@ while landed == 0
                 switch key
                     case 'uparrow'
                         T_B = [0; 45040];
+                        m_fuel = m_fuel + mdot_fuel*dt;
                     otherwise
                         T_B = [0; 0];
                 end
@@ -207,15 +213,17 @@ while landed == 0
         T_B = [0; 0];
     end
     
-    % Compute torque
+    % Compute torque and recompute mass
     if m_RCS > 0
         switch controls_sel
             case 2
                 switch key
                     case {'numpad4', 'numpad7'}
                         M_G = 2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     case {'numpad9', 'numpad6'}
                         M_G = -2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     otherwise
                         M_G = 0;
                 end
@@ -223,8 +231,10 @@ while landed == 0
                 switch key
                     case {'a', 'q'}
                         M_G = 2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     case {'e', 'd'}
                         M_G = -2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     otherwise
                         M_G = 0;
                 end
@@ -232,8 +242,10 @@ while landed == 0
                 switch key
                     case 'leftarrow'
                         M_G = 2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     case 'rightarrow'
                         M_G = -2*440*4.29;
+                        m_RCS = m_RCS + mdot_RCS*dt;
                     otherwise
                         M_G = 0;
                 end
@@ -242,37 +254,12 @@ while landed == 0
         M_G = 0;
     end
     
-    
-    % Integrate
     % Recompute mass
-    switch controls_sel
-        case 2
-            switch key
-                case {'numpad4', 'numpad6'}
-                    m_RCS = m_RCS + mdot_RCS*dt;
-                case {'numpad7', 'numpad9'}
-                    m_fuel = m_fuel + mdot_fuel*dt;
-                    m_RCS = m_RCS + mdot_RCS*dt;
-                case 'numpad8'
-                    m_fuel = m_fuel + mdot_fuel*dt;
-            end
-        case 3
-            switch key
-                case {'a', 'd'}
-                    m_RCS = m_RCS + mdot_RCS*dt;
-                case {'q', 'e'}
-                    m_fuel = m_fuel + mdot_fuel*dt;
-                    m_RCS = m_RCS + mdot_RCS*dt;
-                case 'w'
-                    m_fuel = m_fuel + mdot_fuel*dt;
-            end
-        otherwise 
-            switch key
-                case 'uparrow'
-                    m_fuel = m_fuel + mdot_fuel*dt;
-                case{'leftarrow', 'rightarrow'}
-                    m_RCS = m_RCS + mdot_RCS*dt;
-            end
+    if m_fuel < 0
+        m_fuel = 0;
+    end
+    if m_RCS < 0
+        m_RCS = 0;
     end
     m_total = m_dry + m_fuel + m_RCS;
     
@@ -295,7 +282,7 @@ while landed == 0
     plotscene(fig, land_dimensions, stars, @ground, pos, R, T_B, M_G);
 
     % Update information on the command window
-    dispinfo(@ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS);
+    dispinfo(@ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS, is_octave);
     
     % Check if flying, landed, or crashed
     contact_point = R*contact_point_B + pos;
@@ -476,14 +463,19 @@ end
     
 
 % Translate vertices
-ascent_vertices =  ascent_vertices +  pos;
-descent_vertices = descent_vertices + pos;
+ascent_vertices(1,:) =  ascent_vertices(1,:) +  pos(1);
+ascent_vertices(2,:) =  ascent_vertices(2,:) +  pos(2);
+descent_vertices(1,:) = descent_vertices(1,:) + pos(1);
+descent_vertices(2,:) = descent_vertices(2,:) + pos(2);
 if T(2) > 0
-    thrust_vertices = thrust_vertices + pos;
+    thrust_vertices(1,:) = thrust_vertices(1,:) + pos(1);
+    thrust_vertices(2,:) = thrust_vertices(2,:) + pos(2);
 end
 if M ~= 0
-    RCS_vertices_R = RCS_vertices_R + pos;
-    RCS_vertices_L = RCS_vertices_L + pos;
+    RCS_vertices_R(1,:) = RCS_vertices_R(1,:) + pos(1);
+    RCS_vertices_R(2,:) = RCS_vertices_R(2,:) + pos(2);
+    RCS_vertices_L(1,:) = RCS_vertices_L(1,:) + pos(1);
+    RCS_vertices_L(2,:) = RCS_vertices_L(2,:) + pos(2);
 end
 
 % Plot lander
@@ -504,13 +496,13 @@ end
 
 end
 
-function dispinfo(ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS)
+function dispinfo(ground, pos, R, vel, w, contact_point_B, m_dry, m_fuel, m_RCS, is_octave)
 % DISPINFO displays on the command window information about the lunar
 % lander. It displays: position, velocity, distance to the ground, total
 % mass of the lander, and fuel left.
 
 % Compute angle
-theta = sign(R(2,2))*(180/pi)*acos(trace(R)/2);
+theta = -sign(R(1,2))*(180/pi)*acos(trace(R)/2);
 
 % Compute distance to the ground
 contact_point = R*contact_point_B + pos;
@@ -523,12 +515,15 @@ clc;
 fprintf('               x          y\n');
 fprintf('Position: %6.2f m   %6.2f m\n', pos(1), pos(2));
 fprintf('Velocity: %6.2f m/s %6.2f m/s\n', vel(1), vel(2));
-fprintf('Angle to horizon:   %6.2f degrees\n', theta);
-fprintf('Angular velocity:   %6.2f rad/s\n', w);
-fprintf('Ground dist:        %6.2f m\n', ground_dist);
-fprintf('Thruster fuel left: %6.2f kg\n', m_fuel);
-fprintf('RCS fuel left:      %6.2f kg\n', m_RCS);
-fprintf('Total mass:         %6.2f kg\n', m_dry + m_fuel + m_RCS);
+fprintf('Angle to horizon:   %7.2f degrees\n', theta);
+fprintf('Angular velocity:   %7.2f rad/s\n', w);
+fprintf('Ground dist:        %7.2f m\n', ground_dist);
+fprintf('Thruster fuel left: %7.2f kg\n', m_fuel);
+fprintf('RCS fuel left:      %7.2f kg\n', m_RCS);
+fprintf('Total mass:         %7.2f kg\n', m_dry + m_fuel + m_RCS);
+if is_octave
+    fflush(stdout);
+end
 
 end
 

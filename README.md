@@ -23,7 +23,7 @@ Lander
 
 ![](https://github.com/JoanAguilar/Matlab-games/blob/master/images/Lander.png "Lander gameplay")
 
-To play *Lander* run the file *Lander.m* using Matlab. You will first be asked to select which controls you want to use and the level of difficulty. Use the controls you selected to land the Moon lander safely on the Moon.
+To play *Lander* run the file *Lander.m* using Matlab (recommended) or Octave. You will first be asked to select which controls you want to use and the level of difficulty. Use the controls you selected to land the Moon lander safely on the Moon.
 
 *Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
 
