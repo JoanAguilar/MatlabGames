@@ -3,7 +3,7 @@ Two Simple Matlab Games
 
 Overview
 --------
-Included are two simple videogames that are coded and run using Matlab. I coded these games  as a fun side-project with the intention to use them as teaching tool for an undergrad Matlab programming class. Unfortunately, I was not able to finish them on time. Both games use a limited number of Matlab functionalities and are less than 1000 lines long when combined. A second motivation was to test Matlab capabilities to run a videogame that included real time graphics.
+Included are two simple videogames that are coded and run using Matlab. I coded these games as a fun side-project with the intention to use them as teaching tool for an undergrad Matlab programming class. Unfortunately, I was not able to finish them on time. Both games use a limited number of Matlab functionalities and are less than 1000 lines long when combined. A second motivation was to test Matlab capabilities to run a videogame that included real time graphics.
 
 
 Bang Bang!
@@ -25,9 +25,4 @@ Lander
 
 To play *Lander* run the file *Lander.m* using Matlab (recommended) or Octave. You will first be asked to select which controls you want to use and the level of difficulty. Use the controls you selected to land the Moon lander safely on the Moon.
 
-*Lander* was inspired by the 1990 Windows game with the same name. You can find an Android version of the original [here](https://play.google.com/store/apps/details?id=com.pilot51.lander).
-
-
-Disclaimer
-----------
-Feel free to use any of the code here for your own purposes. However, I will appreciate if you reference this repository when you do so :smiley:. If you want, you can also let me know what you are using it for, I will be glad to know, but this is optional.
+*Lander* was inspired by the 1990 Windows game with the same name. You can play the original [here](https://archive.org/details/win3_LANDER).
